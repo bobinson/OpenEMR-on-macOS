@@ -28,9 +28,18 @@
 
 OPENEMR_DOCROOT=/usr/local/var/www/htdocs/openemr
 
+
+# install block
+# TODO : check whether various softwares and installed and proceed accrodingly
+
+brew install mariadb
+# end install block
+
+
 # Remove current test copy of openemr
 # modifying for Mac
 sudo rm -fr /usr/local/var/www/htdocs/openemr
+
 
 # Remove current openemr mysql database
 sudo mysqladmin -f -h localhost -u root drop openemr
@@ -45,6 +54,8 @@ sudo rsync --recursive --links --exclude .git openemr/* $OPENEMR_DOCROOT
 sudo chmod 666 $OPENEMR_DOCROOT/sites/default/sqlconf.php
 # macOS brew install, the user permissions are $APACHE_USER:admin
 
+# running apache as the user and group listed below
+# this is done to give developer user access to the files in the doc root
 APACHE_USER=b5413b
 APACHE_GROUP=admin
 
@@ -64,4 +75,4 @@ sudo chown -R $APACHE_USER:admin $OPENEMR_DOCROOT/gacl/admin/templates_c
 mysql.server restart
 # sudo cp openemr.conf /etc/apache2/sites-available/
 # sudo a2ensite openemr.conf
-# sudo service apache2 restart
+sudo /usr/local/bin/apachectl  restart
