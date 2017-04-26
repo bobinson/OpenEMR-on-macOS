@@ -33,6 +33,13 @@ OPENEMR_DOCROOT=/usr/local/var/www/htdocs/openemr
 # TODO : check whether various softwares and installed and proceed accrodingly
 
 brew install mariadb
+brew tap homebrew/dupes
+brew tap homebrew/versions
+brew tap homebrew/php
+brew tap homebrew/apache
+#brew install httpd24 --with-privileged-ports --with-http2
+#brew install php71 --with-httpd24
+
 # end install block
 
 
