@@ -1,6 +1,19 @@
 # OpenEMR-on-macOS
 
 
+
+**Installations handled in the script**
+
+Instllations are moved to the script. Though PHP and Apache installation and commented out for the time being. Those two must be custom installed at this point.
+
+**Installing PHP**
+
+
+
+`brew unlink php71`
+
+`brew install php71 --with-httpd24
+
 **Installing Apache**
 
 
@@ -13,10 +26,21 @@ brew tap homebrew/dupes
 brew install httpd24 --with-privileged-ports --with-http2
 ```
 
-Changes required in Apache configuration
 
-`User your_user`
-`Group admin`
+**Changes required in Apache configuration**
+
+
+The following change mentions which user and group should be used by the web server to execute its processes. This is chosen to be the developer user to avoid any permission issues. The user can be identified from the $LOGNAME environment vairable
+
+echo $LOGNAME from shell will give your logged in user name (your_user)
+
+```shell
+User your_user
+Group admin
+```
+
+
+We will mod_rewrite plugin to enable rewrite rules.
 
 `LoadModule rewrite_module libexec/mod_rewrite.so`
 
@@ -32,13 +56,6 @@ In the same `<Directory>` block you will find an `AllowOverride` setting, this s
 AllowOverride All
 ```
 
-**Installing PHP**
-
-
-
-`brew unlink php71`
-
-`brew install php71 --with-httpd24
 
 
 
@@ -62,16 +79,16 @@ For our purposes, we will deploy the test code to the above folder.
 
 
 
-`cd /Users/user/hack/code/'
+`cd /Users/$LOGNAME/hack/code/'
 
 git clone <openEMR>
 
 make changes to the code.
 
-Once done, run the script **refresh.openEMR.sh**
+Once done, run the script **refresh_openEMR.sh**
 
 `cd /Users/user/hack/code/`
 
-`bash refresh.openEMR.sh`
+`bash refresh_openEMR.sh`
 
-`
+

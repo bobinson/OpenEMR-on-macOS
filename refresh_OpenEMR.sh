@@ -63,7 +63,7 @@ sudo chmod 666 $OPENEMR_DOCROOT/sites/default/sqlconf.php
 
 # running apache as the user and group listed below
 # this is done to give developer user access to the files in the doc root
-APACHE_USER=b5413b
+APACHE_USER= $LOGNAME
 APACHE_GROUP=admin
 
 sudo chown -R $APACHE_USER:$APACHE_GROUP $OPENEMR_DOCROOT
